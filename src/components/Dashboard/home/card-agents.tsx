@@ -48,7 +48,7 @@ export const CardAgents = () => {
                   <Box>
                      <Flex direction={'column'}>
                         <Text h3 css={{margin: 0}}>
-                           Agents
+                           Top Customers
                         </Text>
                      </Flex>
                   </Box>
@@ -56,11 +56,11 @@ export const CardAgents = () => {
             </Flex>
             <Flex css={{gap: '$6', py: '$4'}} align={'center'}>
                <Text span size={'$xs'}>
-                  Meet your agenda and see their ranks to get the best results
+                  Your most valuable customers and their spending ranks
                </Text>
             </Flex>
             <Flex css={{pt: '$4'}} align={'center'} justify={'center'}>
-               <Avatar.Group count={12}>
+               <Avatar.Group count={8}>
                   {pictureUsers.map((url, index) => (
                      <Avatar
                         key={index}

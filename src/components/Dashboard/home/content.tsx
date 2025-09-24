@@ -56,7 +56,7 @@ export const Content = () => (
                      },
                   }}
                >
-                  Available Balance
+                  Store Overview
                </Text>
                <Flex
                   css={{
@@ -86,7 +86,7 @@ export const Content = () => (
                      },
                   }}
                >
-                  Statistics
+                  Sales & Revenue Over Time
                </Text>
                <Box
                   css={{
@@ -125,7 +125,7 @@ export const Content = () => (
                   },
                }}
             >
-               Section
+               Quick Insights
             </Text>
             <Flex
                direction={'column'}
@@ -170,9 +170,9 @@ export const Content = () => (
                   },
                }}
             >
-               Latest Users
+               Recent Orders
             </Text>
-            <NextLink href="/accounts">
+            <NextLink href="/dashboard/orders">
                <Link
                   block
                   color="primary"
@@ -183,7 +183,7 @@ export const Content = () => (
                      },
                   }}
                >
-                  View All
+                  View All Orders
                </Link>
             </NextLink>
          </Flex>

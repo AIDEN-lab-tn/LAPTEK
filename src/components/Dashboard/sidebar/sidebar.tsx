@@ -14,6 +14,11 @@ import {ReportsIcon} from '../icons/sidebar/reports-icon';
 import {DevIcon} from '../icons/sidebar/dev-icon';
 import {ViewIcon} from '../icons/sidebar/view-icon';
 import {SettingsIcon} from '../icons/sidebar/settings-icon';
+import {OrdersIcon} from '../icons/sidebar/orders-icon';
+import {InventoryIcon} from '../icons/sidebar/inventory-icon';
+import {MarketingIcon} from '../icons/sidebar/marketing-icon';
+import {SupportIcon} from '../icons/sidebar/support-icon';
+import {CategoriesIcon} from '../icons/sidebar/categories-icon';
 import {CollapseItems} from './collapse-items';
 import {SidebarItem} from './sidebar-item';
 import {SidebarMenu} from './sidebar-menu';
@@ -50,61 +55,77 @@ export const SidebarWrapper = () => {
             >
                <Sidebar.Body className="body sidebar">
                   <SidebarItem
-                     title="Home"
+                     title="Dashboard"
                      icon={<HomeIcon />}
                      isActive={pathname === '/dashboard'}
                      href="/dashboard"
                   />
-                  <SidebarMenu title="Main Menu">
+                  <SidebarMenu title="Store Management">
                      <SidebarItem
-                        isActive={pathname === '/dashboard/accounts'}
-                        title="Accounts"
-                        icon={<AccountsIcon />}
-                        href="/dashboard/accounts"
+                        isActive={pathname === '/dashboard/products'}
+                        title="Products"
+                        icon={<ProductsIcon />}
+                        href="/dashboard/products"
+                     />
+                     <SidebarItem
+                        isActive={pathname === '/dashboard/orders'}
+                        title="Orders"
+                        icon={<OrdersIcon />}
+                        href="/dashboard/orders"
+                     />
+                     <SidebarItem
+                        isActive={pathname === '/dashboard/inventory'}
+                        title="Inventory"
+                        icon={<InventoryIcon />}
+                        href="/dashboard/inventory"
+                     />
+                     <SidebarItem
+                        isActive={pathname === '/dashboard/customers'}
+                        title="Customers"
+                        icon={<CustomersIcon />}
+                        href="/dashboard/customers"
                      />
                      <SidebarItem
                         isActive={pathname === '/dashboard/payments'}
                         title="Payments"
                         icon={<PaymentsIcon />}
-                     />
-                     <CollapseItems
-                        icon={<BalanceIcon />}
-                        items={['Banks Accounts', 'Credit Cards', 'Loans']}
-                        title="Balances"
-                     />
-
-                     <SidebarItem
-                        isActive={pathname === '/dashboard/customers'}
-                        title="Customers"
-                        icon={<CustomersIcon />}
-                     />
-                     <SidebarItem
-                        isActive={pathname === '/dashboard/products'}
-                        title="Products"
-                        icon={<ProductsIcon />}
-                     />
-                     <SidebarItem
-                        isActive={pathname === '/dashboard/reports'}
-                        title="Reports"
-                        icon={<ReportsIcon />}
+                        href="/dashboard/payments"
                      />
                   </SidebarMenu>
 
-                  <SidebarMenu title="General">
+                  <SidebarMenu title="Analytics & Marketing">
                      <SidebarItem
-                        isActive={pathname === '/dashboard/developers'}
-                        title="Developers"
-                        icon={<DevIcon />}
+                        isActive={pathname === '/dashboard/reports'}
+                        title="Reports & Analytics"
+                        icon={<ReportsIcon />}
+                        href="/dashboard/reports"
                      />
                      <SidebarItem
-                        isActive={pathname === '/dashboard/view'}
-                        title="View Test Data"
-                        icon={<ViewIcon />}
+                        isActive={pathname === '/dashboard/marketing'}
+                        title="Marketing"
+                        icon={<MarketingIcon />}
+                        href="/dashboard/marketing"
+                     />
+                  </SidebarMenu>
+
+                  <SidebarMenu title="Support & Configuration">
+                     <SidebarItem
+                        isActive={pathname === '/dashboard/support'}
+                        title="Support"
+                        icon={<SupportIcon />}
+                        href="/dashboard/support"
                      />
                      <SidebarItem
                         isActive={pathname === '/dashboard/settings'}
                         title="Settings"
                         icon={<SettingsIcon />}
+                        href="/dashboard/settings"
+                     />
+                     <SidebarItem
+                        isActive={pathname === '/dashboard/integrations'}
+                        title="Integrations"
+                        icon={<DevIcon />}
+                        href="/dashboard/integrations"
                      />
                   </SidebarMenu>
 

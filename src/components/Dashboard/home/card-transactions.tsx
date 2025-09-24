@@ -23,7 +23,7 @@ export const CardTransactions = () => {
          <Card.Body css={{py: '$10'}}>
             <Flex css={{gap: '$5'}} justify={'center'}>
                <Text h3 css={{textAlign: 'center'}}>
-                  Latest Transactions
+                  Best-Selling Products
                </Text>
             </Flex>
             <Flex
@@ -36,19 +36,19 @@ export const CardTransactions = () => {
                   <Avatar
                      size="lg"
                      pointer
-                     src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+                     src="/images/products/product-1-bg-1.png"
                      bordered
-                     color="gradient"
+                     color="primary"
                      stacked
                   />
                   <Text span size={'$base'} weight={'semibold'}>
-                     Jose Perez
+                     Gaming Laptop RTX 4080
                   </Text>
                   <Text span css={{color: '$green600'}} size={'$xs'}>
-                     4500 USD
+                     142 Sales
                   </Text>
                   <Text span css={{color: '$accents8'}} size={'$xs'}>
-                     9/20/2021
+                     $285K
                   </Text>
                </Flex>
 
@@ -56,38 +56,38 @@ export const CardTransactions = () => {
                   <Avatar
                      size="lg"
                      pointer
-                     src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+                     src="/images/products/product-1-bg-2.png"
                      bordered
-                     color="gradient"
+                     color="secondary"
                      stacked
                   />
                   <Text span size={'$base'} weight={'semibold'}>
-                     Andrew Steven
+                     Mechanical Keyboard
                   </Text>
                   <Text span css={{color: '$green600'}} size={'$xs'}>
-                     4500 USD
+                     89 Sales
                   </Text>
                   <Text span css={{color: '$accents8'}} size={'$xs'}>
-                     9/20/2021
+                     $12K
                   </Text>
                </Flex>
                <Flex css={{gap: '$6'}} align={'center'} justify="between">
                   <Avatar
                      size="lg"
                      pointer
-                     src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+                     src="/images/products/product-1-sm-1.png"
                      bordered
-                     color="gradient"
+                     color="success"
                      stacked
                   />
                   <Text span size={'$base'} weight={'semibold'}>
-                     Ruben Garcia
+                     Wireless Mouse RGB
                   </Text>
                   <Text span css={{color: '$green600'}} size={'$xs'}>
-                     1500 USD
+                     156 Sales
                   </Text>
                   <Text span css={{color: '$accents8'}} size={'$xs'}>
-                     2/20/2022
+                     $8.5K
                   </Text>
                </Flex>
                <Flex css={{gap: '$6'}} align={'center'} justify="between">

@@ -11,19 +11,15 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning={true}>
-      <body>
-        <NextThemesProvider
-          defaultTheme="system"
-          attribute="class"
-        >
-          <NextUIProvider>
-            <Layout>
-              {children}
-            </Layout>
-          </NextUIProvider>
-        </NextThemesProvider>
-      </body>
-    </html>
+    <NextThemesProvider
+      defaultTheme="system"
+      attribute="class"
+    >
+      <NextUIProvider>
+        <Layout>
+          {children}
+        </Layout>
+      </NextUIProvider>
+    </NextThemesProvider>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 import {Card, Text} from '@nextui-org/react';
 import React from 'react';
-import {Community} from '../icons/community';
+import {OrderStatusIcon} from '../icons/order-status-icon';
 import {Box} from '../styles/box';
 import {Flex} from '../styles/flex';
 
@@ -17,22 +17,22 @@ export const CardBalance2 = () => {
       >
          <Card.Body css={{py: '$10'}}>
             <Flex css={{gap: '$5'}}>
-               <Community color={'$accents9'} />
+               <OrderStatusIcon />
                <Flex direction={'column'}>
                   <Text span css={{color: ''}}>
-                     Healt Insurance
+                     Pending Orders
                   </Text>
                   <Text span size={'$xs'}>
-                     +2400 People
+                     24 Processing
                   </Text>
                </Flex>
             </Flex>
             <Flex css={{gap: '$6', py: '$4'}} align={'center'}>
                <Text span size={'$xl'} weight={'semibold'}>
-                  $12,138
+                  67
                </Text>
-               <Text span css={{color: '$red600'}} size={'$xs'}>
-                  + 4.5%
+               <Text span css={{color: '$orange600'}} size={'$xs'}>
+                  + 8 new
                </Text>
             </Flex>
             <Flex css={{gap: '$12'}} align={'center'}>
@@ -40,26 +40,26 @@ export const CardBalance2 = () => {
                   <Text
                      span
                      size={'$xs'}
-                     css={{color: '$green600'}}
+                     css={{color: '$blue600'}}
                      weight={'semibold'}
                   >
-                     {'↓'}
+                     {'📦'}
                   </Text>
                   <Text span size={'$xs'}>
-                     11,930 USD
+                     24 Pending
                   </Text>
                </Box>
                <Box>
                   <Text
                      span
                      size={'$xs'}
-                     css={{color: '$red600'}}
+                     css={{color: '$yellow600'}}
                      weight={'semibold'}
                   >
-                     {'↑'}
+                     {'🚚'}
                   </Text>
                   <Text span size={'$xs'}>
-                     54,120 USD
+                     18 Shipped
                   </Text>
                </Box>
                <Box>
@@ -69,10 +69,10 @@ export const CardBalance2 = () => {
                      css={{color: '$green600'}}
                      weight={'semibold'}
                   >
-                     {'⭐'}
+                     {'✅'}
                   </Text>
                   <Text span size={'$xs'}>
-                     150 VIP
+                     25 Delivered
                   </Text>
                </Box>
             </Flex>

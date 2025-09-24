@@ -1,7 +1,7 @@
 "use client";
 import {Card, Text} from '@nextui-org/react';
 import React from 'react';
-import {Community} from '../icons/community';
+import {StockIcon} from '../icons/stock-icon';
 import {Box} from '../styles/box';
 import {Flex} from '../styles/flex';
 
@@ -17,13 +17,13 @@ export const CardBalance3 = () => {
       >
          <Card.Body css={{py: '$10'}}>
             <Flex css={{gap: '$5'}}>
-               <Community />
+               <StockIcon />
                <Flex direction={'column'}>
                   <Text span css={{color: 'white'}}>
-                     Balance Insurance
+                     Inventory Status
                   </Text>
                   <Text span css={{color: 'white'}} size={'$xs'}>
-                     1311 Cars
+                     2,847 Items
                   </Text>
                </Flex>
             </Flex>
@@ -34,10 +34,10 @@ export const CardBalance3 = () => {
                   css={{color: 'white'}}
                   weight={'semibold'}
                >
-                  $3,910
+                  $486K
                </Text>
-               <Text span css={{color: '$red600'}} size={'$xs'}>
-                  + 4.5%
+               <Text span css={{color: '$green400'}} size={'$xs'}>
+                  In Stock
                </Text>
             </Flex>
             <Flex css={{gap: '$12'}} align={'center'}>
@@ -45,39 +45,39 @@ export const CardBalance3 = () => {
                   <Text
                      span
                      size={'$xs'}
-                     css={{color: '$red600'}}
+                     css={{color: '$green400'}}
                      weight={'semibold'}
                   >
-                     {'↓'}
+                     {'✅'}
                   </Text>
                   <Text span size={'$xs'} css={{color: '$white'}}>
-                     100,930 USD
+                     2,630 Available
                   </Text>
                </Box>
                <Box>
                   <Text
                      span
                      size={'$xs'}
-                     css={{color: '$red600'}}
+                     css={{color: '$yellow400'}}
                      weight={'semibold'}
                   >
-                     {'↑'}
+                     {'⚠️'}
                   </Text>
                   <Text span size={'$xs'} css={{color: '$white'}}>
-                     54,120 USD
+                     185 Low Stock
                   </Text>
                </Box>
                <Box>
                   <Text
                      span
                      size={'$xs'}
-                     css={{color: '$green600'}}
+                     css={{color: '$red400'}}
                      weight={'semibold'}
                   >
-                     {'⭐'}
+                     {'❌'}
                   </Text>
                   <Text span size={'$xs'} css={{color: '$white'}}>
-                     125 VIP
+                     32 Out
                   </Text>
                </Box>
             </Flex>

@@ -2,6 +2,7 @@ import {Dropdown, Text} from '@nextui-org/react';
 import React, {useState} from 'react';
 import {AcmeIcon} from '../icons/acme-icon';
 import {AcmeLogo} from '../icons/acmelogo';
+import {LaptekIcon} from '../icons/laptek-icon';
 import {BottomIcon} from '../icons/sidebar/bottom-icon';
 import {Box} from '../styles/box';
 import {Flex} from '../styles/flex';
@@ -14,12 +15,12 @@ interface Company {
 
 export const CompaniesDropdown = () => {
    const [company, setCompany] = useState<Company>({
-      name: 'Acme Co.',
-      location: 'Palo Alto, CA',
-      logo: <AcmeIcon />,
+      name: 'Laptek Store',
+      location: 'Gaming & Tech Hub',
+      logo: <LaptekIcon />,
    });
    return (
-      <Dropdown placement="bottom-right" borderWeight={'extrabold'}>
+      <Dropdown placement="bottom-right">
          <Dropdown.Trigger css={{cursor: 'pointer'}}>
             <Box>
                <Flex align={'center'} css={{gap: '$7'}}>
@@ -55,30 +56,30 @@ export const CompaniesDropdown = () => {
             onAction={(e) => {
                if (e === '1') {
                   setCompany({
-                     name: 'Facebook',
-                     location: 'San Fransico, CA',
-                     logo: <AcmeIcon />,
+                     name: 'Laptek Store',
+                     location: 'Gaming & Tech Hub',
+                     logo: <LaptekIcon />,
                   });
                }
                if (e === '2') {
                   setCompany({
-                     name: 'Instagram',
-                     location: 'Austin, Tx',
-                     logo: <AcmeLogo />,
+                     name: 'Laptek Pro',
+                     location: 'Business Solutions',
+                     logo: <LaptekIcon />,
                   });
                }
                if (e === '3') {
                   setCompany({
-                     name: 'Twitter',
-                     location: 'Brooklyn, NY',
-                     logo: <AcmeIcon />,
+                     name: 'Laptek Gaming',
+                     location: 'Gaming Division',
+                     logo: <LaptekIcon />,
                   });
                }
                if (e === '4') {
                   setCompany({
-                     name: 'Acme Co.',
-                     location: 'Palo Alto, CA',
-                     logo: <AcmeIcon />,
+                     name: 'Laptek Store',
+                     location: 'Gaming & Tech Hub',
+                     logo: <LaptekIcon />,
                   });
                }
             }}
@@ -101,34 +102,34 @@ export const CompaniesDropdown = () => {
                },
             }}
          >
-            <Dropdown.Section title="Companies">
+            <Dropdown.Section title="Store Divisions">
                <Dropdown.Item
                   key="1"
-                  icon={<AcmeIcon />}
-                  description="San Fransico, CA"
+                  icon={<LaptekIcon />}
+                  description="Gaming & Tech Hub"
                >
-                  Facebook
+                  Laptek Store
                </Dropdown.Item>
                <Dropdown.Item
                   key="2"
-                  icon={<AcmeLogo />}
-                  description="Austin, Tx"
+                  icon={<LaptekIcon />}
+                  description="Business Solutions"
                >
-                  Instagram
+                  Laptek Pro
                </Dropdown.Item>
                <Dropdown.Item
                   key="3"
-                  icon={<AcmeIcon />}
-                  description="Brooklyn, NY"
+                  icon={<LaptekIcon />}
+                  description="Gaming Division"
                >
-                  Twitter
+                  Laptek Gaming
                </Dropdown.Item>
                <Dropdown.Item
                   key="4"
-                  icon={<AcmeIcon />}
-                  description="Palo Alto, CA"
+                  icon={<LaptekIcon />}
+                  description="Gaming & Tech Hub"
                >
-                  Acme Co.
+                  Laptek Store
                </Dropdown.Item>
             </Dropdown.Section>
          </Dropdown.Menu>
