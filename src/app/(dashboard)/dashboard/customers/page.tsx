@@ -210,27 +210,8 @@ export default function CustomersPage() {
   };
 
   return (
-    <Box css={{ overflow: 'hidden', height: '100%', background: '$background', display: 'flex', flexDirection: 'column' }}>
-      <Flex
-        css={{
-          flex: 1,
-          pt: '$8',
-          pb: '$8',
-          px: '$8',
-          '@sm': {
-            pt: '$10',
-            pb: '$10',
-            px: '$12',
-          },
-          '@md': {
-            pt: '$12',
-            pb: '$12',
-            px: '$16',
-          },
-        }}
-        justify={'center'}
-        direction={'column'}
-      >
+    <Box css={{ p: '$6', maxWidth: '100%' }}>
+      <Flex direction="column" css={{ gap: '$6' }}>
         {/* Header */}
         <Flex justify="between" align="center" css={{ mb: '$8' }}>
           <Box>

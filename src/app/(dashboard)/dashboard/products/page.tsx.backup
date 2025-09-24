@@ -1,0 +1,435 @@
+'use client';
+
+import React, { useState, useMemo } from 'react';
+import { 
+  Card,
+  Button,
+  Input,
+  Text,
+  Dropdown,
+  Badge,
+  Avatar,
+  Table,
+  Grid
+} from '@nextui-org/react';
+import {Box} from '../../../../components/Dashboard/styles/box';
+import {Flex} from '../../../../components/Dashboard/styles/flex';
+
+// Product interface
+interface Product {
+  id: number;
+  title: string;
+  newPrice: number;
+  oldPrice?: number;
+  image: string;
+}
+
+// Extended interface for dashboard
+interface ProductWithStock extends Product {
+  stock: number;
+  status: 'In Stock' | 'Low Stock' | 'Out of Stock';
+  category: string;
+}
+
+// Sample product data
+const sampleProducts: ProductWithStock[] = [
+  {
+    id: 1,
+    title: "Dell XPS 13 Laptop",
+    newPrice: 999,
+    oldPrice: 1199,
+    image: "/images/products/product-1-bg-1.png",
+    stock: 45,
+    status: 'In Stock',
+    category: 'Laptops'
+  },
+  {
+    id: 2,
+    title: "Apple MacBook Pro 16",
+    newPrice: 2499,
+    oldPrice: 2799,
+    image: "/images/products/product-1-bg-2.png",
+    stock: 12,
+    status: 'Low Stock',
+    category: 'Laptops'
+  },
+  {
+    id: 3,
+    title: "Gaming Mouse RGB",
+    newPrice: 59,
+    oldPrice: 89,
+    image: "/images/products/product-1-sm-1.png",
+    stock: 0,
+    status: 'Out of Stock',
+    category: 'Accessories'
+  },
+  {
+    id: 4,
+    title: "Wireless Keyboard",
+    newPrice: 129,
+    image: "/images/products/product-1-sm-1.png",
+    stock: 67,
+    status: 'In Stock',
+    category: 'Accessories'
+  },
+  {
+    id: 5,
+    title: "4K Gaming Monitor",
+    newPrice: 449,
+    oldPrice: 599,
+    image: "/images/products/product-1-bg-1.png",
+    stock: 23,
+    status: 'In Stock',
+    category: 'Monitors'
+  },
+  {
+    id: 6,
+    title: "Mechanical Keyboard Pro",
+    newPrice: 189,
+    oldPrice: 239,
+    image: "/images/products/product-1-sm-1.png",
+    stock: 8,
+    status: 'Low Stock',
+    category: 'Accessories'
+  }
+];
+
+// Inline SVG icons
+const SearchIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const FilterIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M22 3H2L10 12.46V19L14 21V12.46L22 3Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const PackageIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16.5 9.4L7.5 4.21L16.5 9.4ZM21 16V8C20.9996 7.64928 20.9071 7.30481 20.7315 7.00116C20.556 6.69751 20.3037 6.44536 20 6.27L13 2.27C12.696 2.09446 12.3511 2.00205 12 2.00205C11.6489 2.00205 11.304 2.09446 11 2.27L4 6.27C3.69626 6.44536 3.44398 6.69751 3.26846 7.00116C3.09294 7.30481 3.00036 7.64928 3 8V16C3.00036 16.3507 3.09294 16.6952 3.26846 16.9988C3.44398 17.3025 3.69626 17.5546 4 17.73L11 21.73C11.304 21.9055 11.6489 21.9979 12 21.9979C12.3511 21.9979 12.696 21.9055 13 21.73L20 17.73C20.3037 17.5546 20.556 17.3025 20.7315 16.9988C20.9071 16.6952 20.9996 16.3507 21 16Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M3.27002 6.96L12 12.01L20.73 6.96" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M12 22.08V12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const TrendingUpIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M22 7L13.5 15.5L8.5 10.5L2 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M16 7H22V13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const TrendingDownIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M22 17L13.5 8.5L8.5 13.5L2 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M16 17H22V11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const AlertTriangleIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10.29 3.86L1.82 18C1.64537 18.3024 1.55299 18.6453 1.55201 18.9945C1.55103 19.3437 1.64149 19.6871 1.81445 19.9905C1.98741 20.2939 2.23675 20.5467 2.53773 20.7239C2.83871 20.9011 3.18082 20.9962 3.53 21H20.47C20.8192 20.9962 21.1613 20.9011 21.4623 20.7239C21.7632 20.5467 22.0126 20.2939 22.1855 19.9905C22.3585 19.6871 22.449 19.3437 22.448 18.9945C22.447 18.6453 22.3546 18.3024 22.18 18L13.71 3.86C13.5317 3.56611 13.2807 3.32312 12.9812 3.15448C12.6817 2.98585 12.3437 2.89725 12 2.89725C11.6563 2.89725 11.3183 2.98585 11.0188 3.15448C10.7193 3.32312 10.4683 3.56611 10.29 3.86V3.86Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M12 9V13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M12 17H12.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const DollarSignIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 1V23" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M17 5H9.5C8.57174 5 7.6815 5.36875 7.02513 6.02513C6.36875 6.6815 6 7.57174 6 8.5C6 9.42826 6.36875 10.3185 7.02513 10.9749C7.6815 11.6313 8.57174 12 9.5 12H14.5C15.4283 12 16.3185 12.3687 16.9749 13.0251C17.6313 13.6815 18 14.5717 18 15.5C18 16.4283 17.6313 17.3185 16.9749 17.9749C16.3185 18.6313 15.4283 19 14.5 19H6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const BarChartIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 20V10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M18 20V4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M6 20V16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+export default function ProductsPage() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedStatus, setSelectedStatus] = useState('All');
+
+  const categories = ['All', ...Array.from(new Set(sampleProducts.map(p => p.category)))];
+  const statuses = ['All', 'In Stock', 'Low Stock', 'Out of Stock'];
+
+  const filteredProducts = useMemo(() => {
+    return sampleProducts.filter(product => {
+      const matchesSearch = product.title.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
+      const matchesStatus = selectedStatus === 'All' || product.status === selectedStatus;
+      return matchesSearch && matchesCategory && matchesStatus;
+    });
+  }, [searchTerm, selectedCategory, selectedStatus]);
+
+  const stats = useMemo(() => {
+    const totalProducts = sampleProducts.length;
+    const inStock = sampleProducts.filter(p => p.status === 'In Stock').length;
+    const lowStock = sampleProducts.filter(p => p.status === 'Low Stock').length;
+    const outOfStock = sampleProducts.filter(p => p.status === 'Out of Stock').length;
+    const totalValue = sampleProducts.reduce((sum, p) => sum + (p.newPrice * p.stock), 0);
+    const avgPrice = sampleProducts.reduce((sum, p) => sum + p.newPrice, 0) / totalProducts;
+
+    return { totalProducts, inStock, lowStock, outOfStock, totalValue, avgPrice };
+  }, []);
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'In Stock': return 'success';
+      case 'Low Stock': return 'warning';
+      case 'Out of Stock': return 'danger';
+      default: return 'default';
+    }
+  };
+
+  return (
+    <Box css={{ p: '$6', maxWidth: '100%' }}>
+      <Flex direction="column" css={{ gap: '$6' }}>
+        {/* Header with gradient title */}
+        <Box>
+          <Text 
+            css={{ 
+              fontSize: '$3xl', 
+              fontWeight: '$bold', 
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              mb: '$2'
+            }}
+          >
+            Product Management
+          </Text>
+          <Box 
+            css={{ 
+              width: '100px', 
+              height: '3px', 
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              borderRadius: '$pill'
+            }} 
+          />
+        </Box>
+
+        {/* Stats Grid */}
+        <Grid.Container gap={2} justify="flex-start">
+          <Grid xs={12} sm={6} md={4} lg={2}>
+            <Card css={{ p: '$4', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: 'white' }}>
+              <Flex align="center" css={{ gap: '$3' }}>
+                <Box css={{ opacity: 0.9 }}>
+                  <PackageIcon />
+                </Box>
+                <Flex direction="column">
+                  <Text css={{ fontSize: '$xs', opacity: 0.8 }}>Total Products</Text>
+                  <Text css={{ fontSize: '$xl', fontWeight: '$bold' }}>{stats.totalProducts}</Text>
+                </Flex>
+              </Flex>
+            </Card>
+          </Grid>
+          
+          <Grid xs={12} sm={6} md={4} lg={2}>
+            <Card css={{ p: '$4', background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)', color: 'white' }}>
+              <Flex align="center" css={{ gap: '$3' }}>
+                <Box css={{ opacity: 0.9 }}>
+                  <TrendingUpIcon />
+                </Box>
+                <Flex direction="column">
+                  <Text css={{ fontSize: '$xs', opacity: 0.8 }}>In Stock</Text>
+                  <Text css={{ fontSize: '$xl', fontWeight: '$bold' }}>{stats.inStock}</Text>
+                </Flex>
+              </Flex>
+            </Card>
+          </Grid>
+          
+          <Grid xs={12} sm={6} md={4} lg={2}>
+            <Card css={{ p: '$4', background: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)', color: 'white' }}>
+              <Flex align="center" css={{ gap: '$3' }}>
+                <Box css={{ opacity: 0.9 }}>
+                  <AlertTriangleIcon />
+                </Box>
+                <Flex direction="column">
+                  <Text css={{ fontSize: '$xs', opacity: 0.8 }}>Low Stock</Text>
+                  <Text css={{ fontSize: '$xl', fontWeight: '$bold' }}>{stats.lowStock}</Text>
+                </Flex>
+              </Flex>
+            </Card>
+          </Grid>
+          
+          <Grid xs={12} sm={6} md={4} lg={2}>
+            <Card css={{ p: '$4', background: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)', color: '#333' }}>
+              <Flex align="center" css={{ gap: '$3' }}>
+                <Box css={{ opacity: 0.7 }}>
+                  <TrendingDownIcon />
+                </Box>
+                <Flex direction="column">
+                  <Text css={{ fontSize: '$xs', opacity: 0.8 }}>Out of Stock</Text>
+                  <Text css={{ fontSize: '$xl', fontWeight: '$bold' }}>{stats.outOfStock}</Text>
+                </Flex>
+              </Flex>
+            </Card>
+          </Grid>
+          
+          <Grid xs={12} sm={6} md={4} lg={2}>
+            <Card css={{ p: '$4', background: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)', color: 'white' }}>
+              <Flex align="center" css={{ gap: '$3' }}>
+                <Box css={{ opacity: 0.9 }}>
+                  <DollarSignIcon />
+                </Box>
+                <Flex direction="column">
+                  <Text css={{ fontSize: '$xs', opacity: 0.8 }}>Total Value</Text>
+                  <Text css={{ fontSize: '$xl', fontWeight: '$bold' }}>${stats.totalValue.toLocaleString()}</Text>
+                </Flex>
+              </Flex>
+            </Card>
+          </Grid>
+          
+          <Grid xs={12} sm={6} md={4} lg={2}>
+            <Card css={{ p: '$4', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: 'white' }}>
+              <Flex align="center" css={{ gap: '$3' }}>
+                <Box css={{ opacity: 0.9 }}>
+                  <BarChartIcon />
+                </Box>
+                <Flex direction="column">
+                  <Text css={{ fontSize: '$xs', opacity: 0.8 }}>Avg Price</Text>
+                  <Text css={{ fontSize: '$xl', fontWeight: '$bold' }}>${stats.avgPrice.toFixed(0)}</Text>
+                </Flex>
+              </Flex>
+            </Card>
+          </Grid>
+        </Grid.Container>
+
+        {/* Filters and Search */}
+        <Card css={{ p: '$4' }}>
+          <Flex css={{ gap: '$4' }} wrap="wrap">
+            <Input
+              placeholder="Search products..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              contentLeft={<SearchIcon />}
+              css={{ minWidth: '250px', flex: 1 }}
+            />
+            
+            <Dropdown>
+              <Dropdown.Button flat css={{ minWidth: '150px' }}>
+                <FilterIcon />
+                <Text css={{ ml: '$2' }}>Category: {selectedCategory}</Text>
+              </Dropdown.Button>
+              <Dropdown.Menu
+                selectedKeys={[selectedCategory]}
+                onSelectionChange={(keys) => setSelectedCategory(Array.from(keys)[0] as string)}
+              >
+                {categories.map(category => (
+                  <Dropdown.Item key={category}>{category}</Dropdown.Item>
+                ))}
+              </Dropdown.Menu>
+            </Dropdown>
+
+            <Dropdown>
+              <Dropdown.Button flat css={{ minWidth: '150px' }}>
+                <FilterIcon />
+                <Text css={{ ml: '$2' }}>Status: {selectedStatus}</Text>
+              </Dropdown.Button>
+              <Dropdown.Menu
+                selectedKeys={[selectedStatus]}
+                onSelectionChange={(keys) => setSelectedStatus(Array.from(keys)[0] as string)}
+              >
+                {statuses.map(status => (
+                  <Dropdown.Item key={status}>{status}</Dropdown.Item>
+                ))}
+              </Dropdown.Menu>
+            </Dropdown>
+          </Flex>
+        </Card>
+
+        {/* Products Table */}
+        <Card css={{ p: '$4' }}>
+          <Table
+            aria-label="Products table"
+            css={{
+              height: "auto",
+              minWidth: "100%",
+            }}
+          >
+            <Table.Header>
+              <Table.Column>PRODUCT</Table.Column>
+              <Table.Column>CATEGORY</Table.Column>
+              <Table.Column>PRICE</Table.Column>
+              <Table.Column>STOCK</Table.Column>
+              <Table.Column>STATUS</Table.Column>
+              <Table.Column>ACTIONS</Table.Column>
+            </Table.Header>
+            <Table.Body>
+              {filteredProducts.map((product) => (
+                <Table.Row key={product.id}>
+                  <Table.Cell>
+                    <Flex align="center" css={{ gap: '$3' }}>
+                      <Avatar 
+                        src={product.image} 
+                        size="md" 
+                        css={{ minWidth: '40px' }}
+                        squared
+                      />
+                      <Flex direction="column">
+                        <Text css={{ fontWeight: '$medium' }}>{product.title}</Text>
+                        <Text css={{ fontSize: '$sm', color: '$gray600' }}>
+                          SKU: {product.id}
+                        </Text>
+                      </Flex>
+                    </Flex>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Badge variant="flat" color="primary">
+                      {product.category}
+                    </Badge>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Flex direction="column">
+                      <Text css={{ fontWeight: '$medium' }}>${product.newPrice}</Text>
+                      {product.oldPrice && (
+                        <Text css={{ fontSize: '$sm', color: '$gray600', textDecoration: 'line-through' }}>
+                          ${product.oldPrice}
+                        </Text>
+                      )}
+                    </Flex>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Text>{product.stock}</Text>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Badge color={getStatusColor(product.status)} variant="flat">
+                      {product.status}
+                    </Badge>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Flex css={{ gap: '$2' }}>
+                      <Button auto size="sm" color="primary" ghost>
+                        Edit
+                      </Button>
+                      <Button auto size="sm" color="error" ghost>
+                        Delete
+                      </Button>
+                    </Flex>
+                  </Table.Cell>
+                </Table.Row>
+              ))}
+            </Table.Body>
+          </Table>
+        </Card>
+
+        {/* Results summary */}
+        <Card css={{ p: '$3' }}>
+          <Text css={{ color: '$gray600', textAlign: 'center' }}>
+            Showing {filteredProducts.length} of {sampleProducts.length} products
+          </Text>
+        </Card>
+      </Flex>
+    </Box>
+  );
+}
+

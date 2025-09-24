@@ -5,7 +5,7 @@ import {DarkModeSwitch} from './darkmodeswitch';
 export const UserDropdown = () => {
    return (
       <Dropdown placement="bottom-right">
-         <Navbar.Item>
+         <Navbar.Item suppressHydrationWarning={true}>
             <Dropdown.Trigger>
                <Avatar
                   bordered
@@ -13,6 +13,7 @@ export const UserDropdown = () => {
                   color="secondary"
                   size="md"
                   src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                  suppressHydrationWarning={true}
                />
             </Dropdown.Trigger>
          </Navbar.Item>

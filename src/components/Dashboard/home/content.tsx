@@ -172,19 +172,16 @@ export const Content = () => (
             >
                Recent Orders
             </Text>
-            <NextLink href="/dashboard/orders">
-               <Link
-                  block
-                  color="primary"
-                  css={{
-                     'textAlign': 'center',
-                     '@lg': {
-                        textAlign: 'inherit',
-                     },
-                  }}
-               >
-                  View All Orders
-               </Link>
+            <NextLink 
+               href="/dashboard/orders"
+               style={{
+                  display: 'block',
+                  color: 'var(--nextui-colors-primary)',
+                  textAlign: 'center',
+                  textDecoration: 'none'
+               }}
+            >
+               View All Orders
             </NextLink>
          </Flex>
          <TableWrapper />

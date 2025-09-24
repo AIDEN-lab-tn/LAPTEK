@@ -37,69 +37,130 @@ export default function SettingsPage() {
   };
 
   return (
-    <Box css={{ overflow: 'hidden', height: '100%', background: '$background' }}>
-      <Flex
-        css={{
-          pt: '$12',
-          px: '$12',
-          '@sm': {
-            pt: '$16',
-            px: '$16',
-          },
-          '@md': {
-            pt: '$16',
-            px: '$24',
-          },
-        }}
-        justify={'center'}
-        direction={'column'}
-      >
-        {/* Header */}
-        <Flex justify="between" align="center" css={{ mb: '$12' }}>
-          <Box>
-            <Text h1 css={{ m: 0, fontSize: '$2xl', fontWeight: '$bold' }}>
+    <Box css={{ p: '$6', maxWidth: '100%' }}>
+      <Flex direction="column" css={{ gap: '$6' }}>
+        {/* Page Header */}
+        <Box css={{ mb: '$6' }}>
+          <Box css={{
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            display: 'inline-block',
+            position: 'relative',
+            '&::after': {
+              content: '""',
+              position: 'absolute',
+              bottom: '-4px',
+              left: 0,
+              right: 0,
+              height: '3px',
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              borderRadius: '2px'
+            }
+          }}>
+            <Text h1 css={{ 
+              fontSize: '$3xl', 
+              fontWeight: '$bold', 
+              m: 0,
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}>
               Store Settings
             </Text>
-            <Text css={{ color: '$accents8', mt: '$2' }}>
-              Configure your store preferences and system settings
-            </Text>
           </Box>
-          <Button auto color="primary" css={{ fontWeight: '$medium' }}>
-            Save Changes
-          </Button>
-        </Flex>
+          <Text css={{ color: '$accents7', mt: '$2' }}>
+            Configure your store preferences and system settings
+          </Text>
+        </Box>
 
         {/* Tab Navigation */}
-        <Card css={{ p: '$4', mb: '$8' }}>
-          <Flex css={{ gap: '$4' }}>
+        <Card css={{ 
+          p: '$6', 
+          mb: '$4',
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          border: 'none',
+          boxShadow: '0 4px 20px rgba(102, 126, 234, 0.1)'
+        }}>
+          <Flex justify="between" align="center" css={{ mb: '$4' }}>
+            <Text css={{ 
+              fontSize: '$lg', 
+              fontWeight: '$bold',
+              color: 'white'
+            }}>
+              Settings Dashboard
+            </Text>
+            <Button auto css={{ 
+              background: 'rgba(255, 255, 255, 0.2)', 
+              color: 'white',
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+              '&:hover': {
+                background: 'rgba(255, 255, 255, 0.3)'
+              }
+            }}>
+              Save Changes
+            </Button>
+          </Flex>
+          
+          <Flex css={{ gap: '$3', flexWrap: 'wrap' }}>
             <Button 
               auto 
-              color={activeTab === "store" ? "primary" : "default"}
-              variant={activeTab === "store" ? "solid" : "light"}
+              flat
+              css={{
+                background: activeTab === "store" ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)',
+                color: 'white',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                '&:hover': {
+                  background: 'rgba(255, 255, 255, 0.2)'
+                }
+              }}
               onPress={() => setActiveTab("store")}
             >
               Store Settings
             </Button>
             <Button 
               auto 
-              color={activeTab === "shipping" ? "primary" : "default"}
-              variant={activeTab === "shipping" ? "solid" : "light"}
+              flat
+              css={{
+                background: activeTab === "shipping" ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)',
+                color: 'white',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                '&:hover': {
+                  background: 'rgba(255, 255, 255, 0.2)'
+                }
+              }}
               onPress={() => setActiveTab("shipping")}
             >
               Shipping
             </Button>
             <Button 
               auto 
-              color={activeTab === "users" ? "primary" : "default"}
-              variant={activeTab === "users" ? "solid" : "light"}
+              flat
+              css={{
+                background: activeTab === "users" ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)',
+                color: 'white',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                '&:hover': {
+                  background: 'rgba(255, 255, 255, 0.2)'
+                }
+              }}
               onPress={() => setActiveTab("users")}
             >
               Users & Roles
             </Button>
             <Button 
               auto 
-              color={activeTab === "notifications" ? "primary" : "default"}
-              variant={activeTab === "notifications" ? "solid" : "light"}
+              flat
+              css={{
+                background: activeTab === "notifications" ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)',
+                color: 'white',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                '&:hover': {
+                  background: 'rgba(255, 255, 255, 0.2)'
+                }
+              }}
               onPress={() => setActiveTab("notifications")}
             >
               Notifications
@@ -261,85 +322,182 @@ export default function SettingsPage() {
 
         {/* Users & Roles Tab */}
         {activeTab === "users" && (
-          <Card css={{ p: 0 }}>
-            <Card.Header>
-              <Flex justify="between" align="center">
-                <Text h3 css={{ m: 0 }}>User Management</Text>
-                <Button color="primary">Invite User</Button>
-              </Flex>
-            </Card.Header>
-            <Card.Body css={{ p: 0 }}>
-              <Box css={{ overflowX: 'auto' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                  <thead>
-                    <tr style={{ borderBottom: '1px solid var(--nextui-colors-border)' }}>
-                      <th style={{ padding: '12px', textAlign: 'left', fontWeight: 600 }}>USER</th>
-                      <th style={{ padding: '12px', textAlign: 'left', fontWeight: 600 }}>ROLE</th>
-                      <th style={{ padding: '12px', textAlign: 'left', fontWeight: 600 }}>STATUS</th>
-                      <th style={{ padding: '12px', textAlign: 'left', fontWeight: 600 }}>LAST ACTIVE</th>
-                      <th style={{ padding: '12px', textAlign: 'left', fontWeight: 600 }}>ACTIONS</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr style={{ borderBottom: '1px solid var(--nextui-colors-border)' }}>
-                      <td style={{ padding: '12px' }}>
-                        <Box>
-                          <Text css={{ fontWeight: '$medium' }}>Admin User</Text>
-                          <Text css={{ fontSize: '$sm', color: '$accents7' }}>admin@laptek.com</Text>
-                        </Box>
-                      </td>
-                      <td style={{ padding: '12px' }}>
-                        <Text css={{ fontWeight: '$medium', color: '$error' }}>Super Admin</Text>
-                      </td>
-                      <td style={{ padding: '12px' }}>
-                        <Text css={{ color: '$success' }}>Active</Text>
-                      </td>
-                      <td style={{ padding: '12px' }}>2 minutes ago</td>
-                      <td style={{ padding: '12px' }}>
-                        <Button size="sm" light>Edit</Button>
-                      </td>
-                    </tr>
-                    <tr style={{ borderBottom: '1px solid var(--nextui-colors-border)' }}>
-                      <td style={{ padding: '12px' }}>
-                        <Box>
-                          <Text css={{ fontWeight: '$medium' }}>John Manager</Text>
-                          <Text css={{ fontSize: '$sm', color: '$accents7' }}>john@laptek.com</Text>
-                        </Box>
-                      </td>
-                      <td style={{ padding: '12px' }}>
-                        <Text css={{ fontWeight: '$medium', color: '$warning' }}>Manager</Text>
-                      </td>
-                      <td style={{ padding: '12px' }}>
-                        <Text css={{ color: '$success' }}>Active</Text>
-                      </td>
-                      <td style={{ padding: '12px' }}>1 hour ago</td>
-                      <td style={{ padding: '12px' }}>
-                        <Button size="sm" light>Edit</Button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style={{ padding: '12px' }}>
-                        <Box>
-                          <Text css={{ fontWeight: '$medium' }}>Jane Support</Text>
-                          <Text css={{ fontSize: '$sm', color: '$accents7' }}>jane@laptek.com</Text>
-                        </Box>
-                      </td>
-                      <td style={{ padding: '12px' }}>
-                        <Text css={{ fontWeight: '$medium', color: '$primary' }}>Support</Text>
-                      </td>
-                      <td style={{ padding: '12px' }}>
-                        <Text css={{ color: '$success' }}>Active</Text>
-                      </td>
-                      <td style={{ padding: '12px' }}>Yesterday</td>
-                      <td style={{ padding: '12px' }}>
-                        <Button size="sm" light>Edit</Button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </Box>
-            </Card.Body>
-          </Card>
+          <Box>
+            <Flex justify="between" align="center" css={{ mb: '$4' }}>
+              <Text h3 css={{ m: 0, fontSize: '$lg', fontWeight: '$semibold' }}>User Management</Text>
+              <Button color="primary">Invite User</Button>
+            </Flex>
+            
+            <Box css={{ display: 'flex', flexDirection: 'column', gap: '$3' }}>
+              {/* Admin User Card */}
+              <Card css={{
+                p: '$4',
+                borderRadius: '$xl',
+                border: '1px solid $border',
+                background: '$backgroundContrast',
+                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                '&:hover': {
+                  transform: 'translateY(-2px)',
+                  boxShadow: '0 8px 30px rgba(0, 0, 0, 0.12)',
+                }
+              }}>
+                <Flex css={{ width: '100%', gap: '$4' }}>
+                  {/* User Info */}
+                  <Flex align="center" css={{ gap: '$3', flex: '2' }}>
+                    <Box css={{
+                      p: '$3',
+                      borderRadius: '$lg',
+                      background: 'linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%)',
+                      color: 'white'
+                    }}>
+                      <SettingsIcon />
+                    </Box>
+                    <Box>
+                      <Text css={{ fontWeight: '$bold', fontSize: '$sm' }}>Admin User</Text>
+                      <Text css={{ color: '$accents7', fontSize: '$xs' }}>admin@laptek.com</Text>
+                    </Box>
+                  </Flex>
+                  
+                  {/* Role */}
+                  <Flex direction="column" align="end" css={{ flex: '1' }}>
+                    <Text css={{ fontWeight: '$bold', fontSize: '$sm', color: '$error' }}>Super Admin</Text>
+                    <Text css={{ color: '$accents7', fontSize: '$xs' }}>Role</Text>
+                  </Flex>
+                  
+                  {/* Status */}
+                  <Flex direction="column" align="end" css={{ flex: '1' }}>
+                    <Text css={{ color: '$success', fontWeight: '$semibold', fontSize: '$sm' }}>Active</Text>
+                    <Text css={{ color: '$accents7', fontSize: '$xs' }}>Status</Text>
+                  </Flex>
+                  
+                  {/* Last Active */}
+                  <Flex direction="column" align="end" css={{ flex: '1' }}>
+                    <Text css={{ fontWeight: '$semibold', fontSize: '$sm' }}>2 minutes ago</Text>
+                    <Text css={{ color: '$accents7', fontSize: '$xs' }}>Last Active</Text>
+                  </Flex>
+                  
+                  {/* Actions */}
+                  <Flex align="center" css={{ flex: '0.5' }}>
+                    <Button size="sm" light>Edit</Button>
+                  </Flex>
+                </Flex>
+              </Card>
+
+              {/* Manager User Card */}
+              <Card css={{
+                p: '$4',
+                borderRadius: '$xl',
+                border: '1px solid $border',
+                background: '$backgroundContrast',
+                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                '&:hover': {
+                  transform: 'translateY(-2px)',
+                  boxShadow: '0 8px 30px rgba(0, 0, 0, 0.12)',
+                }
+              }}>
+                <Flex css={{ width: '100%', gap: '$4' }}>
+                  {/* User Info */}
+                  <Flex align="center" css={{ gap: '$3', flex: '2' }}>
+                    <Box css={{
+                      p: '$3',
+                      borderRadius: '$lg',
+                      background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+                      color: 'white'
+                    }}>
+                      <SettingsIcon />
+                    </Box>
+                    <Box>
+                      <Text css={{ fontWeight: '$bold', fontSize: '$sm' }}>John Manager</Text>
+                      <Text css={{ color: '$accents7', fontSize: '$xs' }}>john@laptek.com</Text>
+                    </Box>
+                  </Flex>
+                  
+                  {/* Role */}
+                  <Flex direction="column" align="end" css={{ flex: '1' }}>
+                    <Text css={{ fontWeight: '$bold', fontSize: '$sm', color: '$warning' }}>Manager</Text>
+                    <Text css={{ color: '$accents7', fontSize: '$xs' }}>Role</Text>
+                  </Flex>
+                  
+                  {/* Status */}
+                  <Flex direction="column" align="end" css={{ flex: '1' }}>
+                    <Text css={{ color: '$success', fontWeight: '$semibold', fontSize: '$sm' }}>Active</Text>
+                    <Text css={{ color: '$accents7', fontSize: '$xs' }}>Status</Text>
+                  </Flex>
+                  
+                  {/* Last Active */}
+                  <Flex direction="column" align="end" css={{ flex: '1' }}>
+                    <Text css={{ fontWeight: '$semibold', fontSize: '$sm' }}>1 hour ago</Text>
+                    <Text css={{ color: '$accents7', fontSize: '$xs' }}>Last Active</Text>
+                  </Flex>
+                  
+                  {/* Actions */}
+                  <Flex align="center" css={{ flex: '0.5' }}>
+                    <Button size="sm" light>Edit</Button>
+                  </Flex>
+                </Flex>
+              </Card>
+
+              {/* Support User Card */}
+              <Card css={{
+                p: '$4',
+                borderRadius: '$xl',
+                border: '1px solid $border',
+                background: '$backgroundContrast',
+                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                '&:hover': {
+                  transform: 'translateY(-2px)',
+                  boxShadow: '0 8px 30px rgba(0, 0, 0, 0.12)',
+                }
+              }}>
+                <Flex css={{ width: '100%', gap: '$4' }}>
+                  {/* User Info */}
+                  <Flex align="center" css={{ gap: '$3', flex: '2' }}>
+                    <Box css={{
+                      p: '$3',
+                      borderRadius: '$lg',
+                      background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+                      color: 'white'
+                    }}>
+                      <SettingsIcon />
+                    </Box>
+                    <Box>
+                      <Text css={{ fontWeight: '$bold', fontSize: '$sm' }}>Jane Support</Text>
+                      <Text css={{ color: '$accents7', fontSize: '$xs' }}>jane@laptek.com</Text>
+                    </Box>
+                  </Flex>
+                  
+                  {/* Role */}
+                  <Flex direction="column" align="end" css={{ flex: '1' }}>
+                    <Text css={{ fontWeight: '$bold', fontSize: '$sm', color: '$primary' }}>Support</Text>
+                    <Text css={{ color: '$accents7', fontSize: '$xs' }}>Role</Text>
+                  </Flex>
+                  
+                  {/* Status */}
+                  <Flex direction="column" align="end" css={{ flex: '1' }}>
+                    <Text css={{ color: '$success', fontWeight: '$semibold', fontSize: '$sm' }}>Active</Text>
+                    <Text css={{ color: '$accents7', fontSize: '$xs' }}>Status</Text>
+                  </Flex>
+                  
+                  {/* Last Active */}
+                  <Flex direction="column" align="end" css={{ flex: '1' }}>
+                    <Text css={{ fontWeight: '$semibold', fontSize: '$sm' }}>Yesterday</Text>
+                    <Text css={{ color: '$accents7', fontSize: '$xs' }}>Last Active</Text>
+                  </Flex>
+                  
+                  {/* Actions */}
+                  <Flex align="center" css={{ flex: '0.5' }}>
+                    <Button size="sm" light>Edit</Button>
+                  </Flex>
+                </Flex>
+              </Card>
+            </Box>
+          </Box>
         )}
 
         {/* Notifications Tab */}

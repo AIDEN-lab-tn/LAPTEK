@@ -93,120 +93,224 @@ export default function IntegrationsPage() {
   };
 
   return (
-    <Box css={{ overflow: 'hidden', height: '100%', background: '$background' }}>
-      <Flex
-        css={{
-          pt: '$12',
-          px: '$12',
-          '@sm': {
-            pt: '$16',
-            px: '$16',
-          },
-          '@md': {
-            pt: '$16',
-            px: '$24',
-          },
-        }}
-        justify={'center'}
-        direction={'column'}
-      >
-        {/* Header */}
-        <Flex justify="between" align="center" css={{ mb: '$12' }}>
-          <Box>
-            <Text h1 css={{ m: 0, fontSize: '$2xl', fontWeight: '$bold' }}>
+    <Box css={{ p: '$6', maxWidth: '100%' }}>
+      <Flex direction="column" css={{ gap: '$6' }}>
+        {/* Page Header */}
+        <Box css={{ mb: '$6' }}>
+          <Box css={{
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            display: 'inline-block',
+            position: 'relative',
+            '&::after': {
+              content: '""',
+              position: 'absolute',
+              bottom: '-4px',
+              left: 0,
+              right: 0,
+              height: '3px',
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              borderRadius: '2px'
+            }
+          }}>
+            <Text h1 css={{ 
+              fontSize: '$3xl', 
+              fontWeight: '$bold', 
+              m: 0,
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}>
               API & Integrations
             </Text>
-            <Text css={{ color: '$accents8', mt: '$2' }}>
-              Connect third-party services and manage API access
-            </Text>
           </Box>
-          <Button auto color="primary" css={{ fontWeight: '$medium' }}>
-            Browse Integrations
-          </Button>
-        </Flex>
+          <Text css={{ color: '$accents7', mt: '$2' }}>
+            Connect third-party services and manage API access
+          </Text>
+        </Box>
 
         {/* Stats Cards */}
-        <Box css={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '$8', mb: '$12' }}>
-          <Card css={{ p: '$8' }}>
-            <Flex justify="between" align="center">
-              <Box>
-                <Text css={{ color: '$accents8', fontSize: '$sm' }}>Connected</Text>
-                <Text css={{ fontSize: '$2xl', fontWeight: '$bold', mt: '$2', color: '$success' }}>
-                  {integrationStats.connected} / {integrationStats.total}
-                </Text>
-              </Box>
-              <Box css={{ p: '$4', background: '$success2', borderRadius: '$lg' }}>
+        <Box css={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
+          gap: '$6',
+          mb: '$6',
+          '@sm': {
+            gridTemplateColumns: 'repeat(2, 1fr)'
+          },
+          '@md': {
+            gridTemplateColumns: 'repeat(2, 1fr)'
+          },
+          '@lg': {
+            gridTemplateColumns: 'repeat(4, 1fr)'
+          }
+        }}>
+          <Card css={{ 
+            p: '$6', 
+            minHeight: '120px',
+            background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+            border: 'none',
+            boxShadow: '0 6px 20px rgba(16, 185, 129, 0.15)',
+            '&:hover': {
+              transform: 'translateY(-2px)',
+              boxShadow: '0 8px 25px rgba(16, 185, 129, 0.2)',
+              transition: 'all 0.3s ease'
+            }
+          }}>
+            <Flex direction="column" align="center" css={{ textAlign: 'center' }}>
+              <Box css={{ p: '$3', background: 'rgba(255, 255, 255, 0.2)', borderRadius: '$lg', mb: '$3', color: 'white' }}>
                 <InfoIcon />
               </Box>
+              <Text css={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '$xs', fontWeight: '$medium' }}>Connected</Text>
+              <Text css={{ fontSize: '$xl', fontWeight: '$bold', mt: '$2', color: 'white' }}>
+                {integrationStats.connected} / {integrationStats.total}
+              </Text>
             </Flex>
           </Card>
 
-          <Card css={{ p: '$8' }}>
-            <Flex justify="between" align="center">
-              <Box>
-                <Text css={{ color: '$accents8', fontSize: '$sm' }}>Payment</Text>
-                <Text css={{ fontSize: '$2xl', fontWeight: '$bold', mt: '$2', color: '$primary' }}>
-                  {integrationStats.byCategory.payment}
-                </Text>
-              </Box>
-              <Box css={{ p: '$4', background: '$primary2', borderRadius: '$lg' }}>
+          <Card css={{ 
+            p: '$6', 
+            minHeight: '120px',
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            border: 'none',
+            boxShadow: '0 6px 20px rgba(102, 126, 234, 0.15)',
+            '&:hover': {
+              transform: 'translateY(-2px)',
+              boxShadow: '0 8px 25px rgba(102, 126, 234, 0.2)',
+              transition: 'all 0.3s ease'
+            }
+          }}>
+            <Flex direction="column" align="center" css={{ textAlign: 'center' }}>
+              <Box css={{ p: '$3', background: 'rgba(255, 255, 255, 0.2)', borderRadius: '$lg', mb: '$3', color: 'white' }}>
                 <InfoIcon />
               </Box>
+              <Text css={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '$xs', fontWeight: '$medium' }}>Payment</Text>
+              <Text css={{ fontSize: '$xl', fontWeight: '$bold', mt: '$2', color: 'white' }}>
+                {integrationStats.byCategory.payment}
+              </Text>
             </Flex>
           </Card>
 
-          <Card css={{ p: '$8' }}>
-            <Flex justify="between" align="center">
-              <Box>
-                <Text css={{ color: '$accents8', fontSize: '$sm' }}>Shipping</Text>
-                <Text css={{ fontSize: '$2xl', fontWeight: '$bold', mt: '$2', color: '$secondary' }}>
-                  {integrationStats.byCategory.shipping}
-                </Text>
-              </Box>
-              <Box css={{ p: '$4', background: '$secondary2', borderRadius: '$lg' }}>
+          <Card css={{ 
+            p: '$6', 
+            minHeight: '120px',
+            background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+            border: 'none',
+            boxShadow: '0 6px 20px rgba(79, 172, 254, 0.15)',
+            '&:hover': {
+              transform: 'translateY(-2px)',
+              boxShadow: '0 8px 25px rgba(79, 172, 254, 0.2)',
+              transition: 'all 0.3s ease'
+            }
+          }}>
+            <Flex direction="column" align="center" css={{ textAlign: 'center' }}>
+              <Box css={{ p: '$3', background: 'rgba(255, 255, 255, 0.2)', borderRadius: '$lg', mb: '$3', color: 'white' }}>
                 <InfoIcon />
               </Box>
+              <Text css={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '$xs', fontWeight: '$medium' }}>Shipping</Text>
+              <Text css={{ fontSize: '$xl', fontWeight: '$bold', mt: '$2', color: 'white' }}>
+                {integrationStats.byCategory.shipping}
+              </Text>
             </Flex>
           </Card>
 
-          <Card css={{ p: '$8' }}>
-            <Flex justify="between" align="center">
-              <Box>
-                <Text css={{ color: '$accents8', fontSize: '$sm' }}>Analytics</Text>
-                <Text css={{ fontSize: '$2xl', fontWeight: '$bold', mt: '$2', color: '$warning' }}>
-                  {integrationStats.byCategory.analytics}
-                </Text>
-              </Box>
-              <Box css={{ p: '$4', background: '$warning2', borderRadius: '$lg' }}>
+          <Card css={{ 
+            p: '$6', 
+            minHeight: '120px',
+            background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+            border: 'none',
+            boxShadow: '0 6px 20px rgba(245, 158, 11, 0.15)',
+            '&:hover': {
+              transform: 'translateY(-2px)',
+              boxShadow: '0 8px 25px rgba(245, 158, 11, 0.2)',
+              transition: 'all 0.3s ease'
+            }
+          }}>
+            <Flex direction="column" align="center" css={{ textAlign: 'center' }}>
+              <Box css={{ p: '$3', background: 'rgba(255, 255, 255, 0.2)', borderRadius: '$lg', mb: '$3', color: 'white' }}>
                 <InfoIcon />
               </Box>
+              <Text css={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '$xs', fontWeight: '$medium' }}>Analytics</Text>
+              <Text css={{ fontSize: '$xl', fontWeight: '$bold', mt: '$2', color: 'white' }}>
+                {integrationStats.byCategory.analytics}
+              </Text>
             </Flex>
           </Card>
         </Box>
 
         {/* Tab Navigation */}
-        <Card css={{ p: '$4', mb: '$8' }}>
-          <Flex css={{ gap: '$4' }}>
+        <Card css={{ 
+          p: '$6', 
+          mb: '$4',
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          border: 'none',
+          boxShadow: '0 4px 20px rgba(102, 126, 234, 0.1)'
+        }}>
+          <Flex justify="between" align="center" css={{ mb: '$4' }}>
+            <Text css={{ 
+              fontSize: '$lg', 
+              fontWeight: '$bold',
+              color: 'white'
+            }}>
+              Integrations Dashboard
+            </Text>
+            <Button auto css={{ 
+              background: 'rgba(255, 255, 255, 0.2)', 
+              color: 'white',
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+              '&:hover': {
+                background: 'rgba(255, 255, 255, 0.3)'
+              }
+            }}>
+              Browse Integrations
+            </Button>
+          </Flex>
+          
+          <Flex css={{ gap: '$3' }}>
             <Button 
               auto 
-              color={activeTab === "integrations" ? "primary" : "default"}
-              variant={activeTab === "integrations" ? "solid" : "light"}
+              flat
+              css={{
+                background: activeTab === "integrations" ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)',
+                color: 'white',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                '&:hover': {
+                  background: 'rgba(255, 255, 255, 0.2)'
+                }
+              }}
               onPress={() => setActiveTab("integrations")}
             >
               Integrations
             </Button>
             <Button 
               auto 
-              color={activeTab === "api" ? "primary" : "default"}
-              variant={activeTab === "api" ? "solid" : "light"}
+              flat
+              css={{
+                background: activeTab === "api" ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)',
+                color: 'white',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                '&:hover': {
+                  background: 'rgba(255, 255, 255, 0.2)'
+                }
+              }}
               onPress={() => setActiveTab("api")}
             >
               API Keys
             </Button>
             <Button 
               auto 
-              color={activeTab === "webhooks" ? "primary" : "default"}
-              variant={activeTab === "webhooks" ? "solid" : "light"}
+              flat
+              css={{
+                background: activeTab === "webhooks" ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)',
+                color: 'white',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                '&:hover': {
+                  background: 'rgba(255, 255, 255, 0.2)'
+                }
+              }}
               onPress={() => setActiveTab("webhooks")}
             >
               Webhooks

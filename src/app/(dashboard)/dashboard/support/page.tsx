@@ -112,148 +112,270 @@ export default function SupportPage() {
   };
 
   return (
-    <Box css={{ overflow: 'hidden', height: '100%', background: '$background' }}>
-      <Flex
-        css={{
-          pt: '$12',
-          px: '$12',
-          '@sm': {
-            pt: '$16',
-            px: '$16',
-          },
-          '@md': {
-            pt: '$16',
-            px: '$24',
-          },
-        }}
-        justify={'center'}
-        direction={'column'}
-      >
-        {/* Header */}
-        <Flex justify="between" align="center" css={{ mb: '$12' }}>
-          <Box>
-            <Text h1 css={{ m: 0, fontSize: '$2xl', fontWeight: '$bold' }}>
+    <Box css={{ p: '$6', maxWidth: '100%' }}>
+      <Flex direction="column" css={{ gap: '$6' }}>
+        {/* Page Header */}
+        <Box css={{ mb: '$6' }}>
+          <Box css={{
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            display: 'inline-block',
+            position: 'relative',
+            '&::after': {
+              content: '""',
+              position: 'absolute',
+              bottom: '-4px',
+              left: 0,
+              right: 0,
+              height: '3px',
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              borderRadius: '2px'
+            }
+          }}>
+            <Text h1 css={{ 
+              fontSize: '$3xl', 
+              fontWeight: '$bold', 
+              m: 0,
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}>
               Customer Support
             </Text>
-            <Text css={{ color: '$accents8', mt: '$2' }}>
-              Manage customer inquiries and support tickets
-            </Text>
           </Box>
-          <Button auto color="primary" css={{ fontWeight: '$medium' }}>
-            Create Ticket
-          </Button>
-        </Flex>
+          <Text css={{ color: '$accents7', mt: '$2' }}>
+            Manage customer inquiries and support tickets
+          </Text>
+        </Box>
 
         {/* Stats Cards */}
-        <Box css={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '$8', mb: '$12' }}>
-          <Card css={{ p: '$8' }}>
-            <Flex justify="between" align="center">
-              <Box>
-                <Text css={{ color: '$accents8', fontSize: '$sm' }}>Total Tickets</Text>
-                <Text css={{ fontSize: '$2xl', fontWeight: '$bold', mt: '$2' }}>
-                  {supportStats.totalTickets}
-                </Text>
-              </Box>
-              <Box css={{ p: '$4', background: '$blue2', borderRadius: '$lg' }}>
+        <Box css={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
+          gap: '$6',
+          mb: '$6',
+          '@sm': {
+            gridTemplateColumns: 'repeat(2, 1fr)'
+          },
+          '@md': {
+            gridTemplateColumns: 'repeat(3, 1fr)'
+          },
+          '@lg': {
+            gridTemplateColumns: 'repeat(6, 1fr)'
+          }
+        }}>
+          <Card css={{ 
+            p: '$6', 
+            minHeight: '120px',
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            border: 'none',
+            boxShadow: '0 6px 20px rgba(102, 126, 234, 0.15)',
+            '&:hover': {
+              transform: 'translateY(-2px)',
+              boxShadow: '0 8px 25px rgba(102, 126, 234, 0.2)',
+              transition: 'all 0.3s ease'
+            }
+          }}>
+            <Flex direction="column" align="center" css={{ textAlign: 'center' }}>
+              <Box css={{ p: '$3', background: 'rgba(255, 255, 255, 0.2)', borderRadius: '$lg', mb: '$3', color: 'white' }}>
                 <InfoIcon />
               </Box>
+              <Text css={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '$xs', fontWeight: '$medium' }}>Total Tickets</Text>
+              <Text css={{ fontSize: '$xl', fontWeight: '$bold', mt: '$2', color: 'white' }}>
+                {supportStats.totalTickets}
+              </Text>
             </Flex>
           </Card>
 
-          <Card css={{ p: '$8' }}>
-            <Flex justify="between" align="center">
-              <Box>
-                <Text css={{ color: '$accents8', fontSize: '$sm' }}>Open</Text>
-                <Text css={{ fontSize: '$2xl', fontWeight: '$bold', mt: '$2', color: '$warning' }}>
-                  {supportStats.openTickets}
-                </Text>
-              </Box>
-              <Box css={{ p: '$4', background: '$warning2', borderRadius: '$lg' }}>
+          <Card css={{ 
+            p: '$6', 
+            minHeight: '120px',
+            background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+            border: 'none',
+            boxShadow: '0 6px 20px rgba(245, 158, 11, 0.15)',
+            '&:hover': {
+              transform: 'translateY(-2px)',
+              boxShadow: '0 8px 25px rgba(245, 158, 11, 0.2)',
+              transition: 'all 0.3s ease'
+            }
+          }}>
+            <Flex direction="column" align="center" css={{ textAlign: 'center' }}>
+              <Box css={{ p: '$3', background: 'rgba(255, 255, 255, 0.2)', borderRadius: '$lg', mb: '$3', color: 'white' }}>
                 <InfoIcon />
               </Box>
+              <Text css={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '$xs', fontWeight: '$medium' }}>Open Tickets</Text>
+              <Text css={{ fontSize: '$xl', fontWeight: '$bold', mt: '$2', color: 'white' }}>
+                {supportStats.openTickets}
+              </Text>
             </Flex>
           </Card>
 
-          <Card css={{ p: '$8' }}>
-            <Flex justify="between" align="center">
-              <Box>
-                <Text css={{ color: '$accents8', fontSize: '$sm' }}>In Progress</Text>
-                <Text css={{ fontSize: '$2xl', fontWeight: '$bold', mt: '$2', color: '$primary' }}>
-                  {supportStats.inProgressTickets}
-                </Text>
-              </Box>
-              <Box css={{ p: '$4', background: '$primary2', borderRadius: '$lg' }}>
+          <Card css={{ 
+            p: '$6', 
+            minHeight: '120px',
+            background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+            border: 'none',
+            boxShadow: '0 6px 20px rgba(79, 172, 254, 0.15)',
+            '&:hover': {
+              transform: 'translateY(-2px)',
+              boxShadow: '0 8px 25px rgba(79, 172, 254, 0.2)',
+              transition: 'all 0.3s ease'
+            }
+          }}>
+            <Flex direction="column" align="center" css={{ textAlign: 'center' }}>
+              <Box css={{ p: '$3', background: 'rgba(255, 255, 255, 0.2)', borderRadius: '$lg', mb: '$3', color: 'white' }}>
                 <InfoIcon />
               </Box>
+              <Text css={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '$xs', fontWeight: '$medium' }}>In Progress</Text>
+              <Text css={{ fontSize: '$xl', fontWeight: '$bold', mt: '$2', color: 'white' }}>
+                {supportStats.inProgressTickets}
+              </Text>
             </Flex>
           </Card>
 
-          <Card css={{ p: '$8' }}>
-            <Flex justify="between" align="center">
-              <Box>
-                <Text css={{ color: '$accents8', fontSize: '$sm' }}>Resolved</Text>
-                <Text css={{ fontSize: '$2xl', fontWeight: '$bold', mt: '$2', color: '$success' }}>
-                  {supportStats.resolvedTickets}
-                </Text>
-              </Box>
-              <Box css={{ p: '$4', background: '$success2', borderRadius: '$lg' }}>
+          <Card css={{ 
+            p: '$6', 
+            minHeight: '120px',
+            background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+            border: 'none',
+            boxShadow: '0 6px 20px rgba(16, 185, 129, 0.15)',
+            '&:hover': {
+              transform: 'translateY(-2px)',
+              boxShadow: '0 8px 25px rgba(16, 185, 129, 0.2)',
+              transition: 'all 0.3s ease'
+            }
+          }}>
+            <Flex direction="column" align="center" css={{ textAlign: 'center' }}>
+              <Box css={{ p: '$3', background: 'rgba(255, 255, 255, 0.2)', borderRadius: '$lg', mb: '$3', color: 'white' }}>
                 <InfoIcon />
               </Box>
+              <Text css={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '$xs', fontWeight: '$medium' }}>Resolved</Text>
+              <Text css={{ fontSize: '$xl', fontWeight: '$bold', mt: '$2', color: 'white' }}>
+                {supportStats.resolvedTickets}
+              </Text>
             </Flex>
           </Card>
 
-          <Card css={{ p: '$8' }}>
-            <Flex justify="between" align="center">
-              <Box>
-                <Text css={{ color: '$accents8', fontSize: '$sm' }}>Avg Response</Text>
-                <Text css={{ fontSize: '$2xl', fontWeight: '$bold', mt: '$2', color: '$secondary' }}>
-                  {supportStats.avgResponseTime}
-                </Text>
-              </Box>
-              <Box css={{ p: '$4', background: '$secondary2', borderRadius: '$lg' }}>
+          <Card css={{ 
+            p: '$6', 
+            minHeight: '120px',
+            background: 'linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%)',
+            border: 'none',
+            boxShadow: '0 6px 20px rgba(255, 107, 107, 0.15)',
+            '&:hover': {
+              transform: 'translateY(-2px)',
+              boxShadow: '0 8px 25px rgba(255, 107, 107, 0.2)',
+              transition: 'all 0.3s ease'
+            }
+          }}>
+            <Flex direction="column" align="center" css={{ textAlign: 'center' }}>
+              <Box css={{ p: '$3', background: 'rgba(255, 255, 255, 0.2)', borderRadius: '$lg', mb: '$3', color: 'white' }}>
                 <InfoIcon />
               </Box>
+              <Text css={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '$xs', fontWeight: '$medium' }}>Avg Response</Text>
+              <Text css={{ fontSize: '$xl', fontWeight: '$bold', mt: '$2', color: 'white' }}>
+                {supportStats.avgResponseTime}
+              </Text>
             </Flex>
           </Card>
 
-          <Card css={{ p: '$8' }}>
-            <Flex justify="between" align="center">
-              <Box>
-                <Text css={{ color: '$accents8', fontSize: '$sm' }}>Satisfaction</Text>
-                <Text css={{ fontSize: '$2xl', fontWeight: '$bold', mt: '$2', color: '$success' }}>
-                  {supportStats.satisfactionRate}
-                </Text>
-              </Box>
-              <Box css={{ p: '$4', background: '$success2', borderRadius: '$lg' }}>
+          <Card css={{ 
+            p: '$6', 
+            minHeight: '120px',
+            background: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+            border: 'none',
+            boxShadow: '0 6px 20px rgba(168, 237, 234, 0.15)',
+            '&:hover': {
+              transform: 'translateY(-2px)',
+              boxShadow: '0 8px 25px rgba(168, 237, 234, 0.2)',
+              transition: 'all 0.3s ease'
+            }
+          }}>
+            <Flex direction="column" align="center" css={{ textAlign: 'center' }}>
+              <Box css={{ p: '$3', background: 'rgba(255, 255, 255, 0.2)', borderRadius: '$lg', mb: '$3', color: 'white' }}>
                 <InfoIcon />
               </Box>
+              <Text css={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '$xs', fontWeight: '$medium' }}>Satisfaction</Text>
+              <Text css={{ fontSize: '$xl', fontWeight: '$bold', mt: '$2', color: 'white' }}>
+                {supportStats.satisfactionRate}
+              </Text>
             </Flex>
           </Card>
         </Box>
 
         {/* Tab Navigation */}
-        <Card css={{ p: '$4', mb: '$8' }}>
-          <Flex css={{ gap: '$4' }}>
+        <Card css={{ 
+          p: '$6', 
+          mb: '$4',
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          border: 'none',
+          boxShadow: '0 4px 20px rgba(102, 126, 234, 0.1)'
+        }}>
+          <Flex justify="between" align="center" css={{ mb: '$4' }}>
+            <Text css={{ 
+              fontSize: '$lg', 
+              fontWeight: '$bold',
+              color: 'white'
+            }}>
+              Support Dashboard
+            </Text>
+            <Button auto css={{ 
+              background: 'rgba(255, 255, 255, 0.2)', 
+              color: 'white',
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+              '&:hover': {
+                background: 'rgba(255, 255, 255, 0.3)'
+              }
+            }}>
+              Create Ticket
+            </Button>
+          </Flex>
+          
+          <Flex css={{ gap: '$3' }}>
             <Button 
               auto 
-              color={activeTab === "tickets" ? "primary" : "default"}
-              variant={activeTab === "tickets" ? "solid" : "light"}
+              flat
+              css={{
+                background: activeTab === "tickets" ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)',
+                color: 'white',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                '&:hover': {
+                  background: 'rgba(255, 255, 255, 0.2)'
+                }
+              }}
               onPress={() => setActiveTab("tickets")}
             >
               Support Tickets
             </Button>
             <Button 
               auto 
-              color={activeTab === "messages" ? "primary" : "default"}
-              variant={activeTab === "messages" ? "solid" : "light"}
+              flat
+              css={{
+                background: activeTab === "messages" ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)',
+                color: 'white',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                '&:hover': {
+                  background: 'rgba(255, 255, 255, 0.2)'
+                }
+              }}
               onPress={() => setActiveTab("messages")}
             >
               Messages
             </Button>
             <Button 
               auto 
-              color={activeTab === "faq" ? "primary" : "default"}
-              variant={activeTab === "faq" ? "solid" : "light"}
+              flat
+              css={{
+                background: activeTab === "faq" ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)',
+                color: 'white',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                '&:hover': {
+                  background: 'rgba(255, 255, 255, 0.2)'
+                }
+              }}
               onPress={() => setActiveTab("faq")}
             >
               FAQ Management
@@ -263,83 +385,96 @@ export default function SupportPage() {
 
         {/* Tickets Tab */}
         {activeTab === "tickets" && (
-          <Card css={{ p: 0 }}>
-            <Card.Header>
-              <Text h3 css={{ m: 0 }}>Support Tickets</Text>
-            </Card.Header>
-            <Card.Body css={{ p: 0 }}>
-              <Box css={{ overflowX: 'auto' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                  <thead>
-                    <tr style={{ borderBottom: '1px solid var(--nextui-colors-border)' }}>
-                      <th style={{ padding: '12px', textAlign: 'left', fontWeight: 600 }}>TICKET</th>
-                      <th style={{ padding: '12px', textAlign: 'left', fontWeight: 600 }}>CUSTOMER</th>
-                      <th style={{ padding: '12px', textAlign: 'left', fontWeight: 600 }}>SUBJECT</th>
-                      <th style={{ padding: '12px', textAlign: 'left', fontWeight: 600 }}>PRIORITY</th>
-                      <th style={{ padding: '12px', textAlign: 'left', fontWeight: 600 }}>STATUS</th>
-                      <th style={{ padding: '12px', textAlign: 'left', fontWeight: 600 }}>ASSIGNED</th>
-                      <th style={{ padding: '12px', textAlign: 'left', fontWeight: 600 }}>ACTIONS</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {tickets.map((ticket) => (
-                      <tr key={ticket.id} style={{ borderBottom: '1px solid var(--nextui-colors-border)' }}>
-                        <td style={{ padding: '12px' }}>
-                          <Box>
-                            <Text css={{ fontWeight: '$medium' }}>{ticket.ticketNumber}</Text>
-                            <Text css={{ fontSize: '$sm', color: '$accents7' }}>
-                              {new Date(ticket.createdDate).toLocaleDateString()}
-                            </Text>
-                          </Box>
-                        </td>
-                        <td style={{ padding: '12px' }}>
-                          <Box>
-                            <Text css={{ fontWeight: '$medium' }}>{ticket.customer.name}</Text>
-                            <Text css={{ fontSize: '$sm', color: '$accents7' }}>
-                              {ticket.customer.email}
-                            </Text>
-                          </Box>
-                        </td>
-                        <td style={{ padding: '12px' }}>
-                          <Text css={{ maxWidth: '200px' }}>{ticket.subject}</Text>
-                        </td>
-                        <td style={{ padding: '12px' }}>
-                          <Badge color={getPriorityColor(ticket.priority)} variant="flat" size="sm">
-                            {ticket.priority.toUpperCase()}
-                          </Badge>
-                        </td>
-                        <td style={{ padding: '12px' }}>
-                          <Badge color={getStatusColor(ticket.status)} variant="flat" size="sm">
-                            {ticket.status.toUpperCase().replace('-', ' ')}
-                          </Badge>
-                        </td>
-                        <td style={{ padding: '12px' }}>
-                          <Text css={{ fontSize: '$sm' }}>
-                            {ticket.assignedTo || "Unassigned"}
-                          </Text>
-                        </td>
-                        <td style={{ padding: '12px' }}>
-                          <Flex css={{ gap: '$2' }}>
-                            <Button auto light size="sm" icon={<InfoIcon />} />
-                            <Dropdown>
-                              <Dropdown.Button auto light size="sm" icon={<DotsIcon />} />
-                              <Dropdown.Menu aria-label="Ticket Actions">
-                                <Dropdown.Item>View Details</Dropdown.Item>
-                                <Dropdown.Item>Assign Agent</Dropdown.Item>
-                                <Dropdown.Item>Change Priority</Dropdown.Item>
-                                <Dropdown.Item>Add Note</Dropdown.Item>
-                                <Dropdown.Item color="success">Resolve</Dropdown.Item>
-                              </Dropdown.Menu>
-                            </Dropdown>
-                          </Flex>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </Box>
-            </Card.Body>
-          </Card>
+          <Box css={{ display: 'flex', flexDirection: 'column', gap: '$3' }}>
+            {tickets.map((ticket) => (
+              <Card key={ticket.id} css={{
+                p: '$4',
+                borderRadius: '$xl',
+                border: '1px solid $border',
+                background: '$backgroundContrast',
+                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                '&:hover': {
+                  transform: 'translateY(-2px)',
+                  boxShadow: '0 8px 30px rgba(0, 0, 0, 0.12)',
+                }
+              }}>
+                <Flex css={{ width: '100%', gap: '$4' }}>
+                  {/* Ticket Info */}
+                  <Flex align="center" css={{ gap: '$3', flex: '2' }}>
+                    <Box css={{
+                      p: '$3',
+                      borderRadius: '$lg',
+                      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                      color: 'white'
+                    }}>
+                      <InfoIcon />
+                    </Box>
+                    <Box>
+                      <Text css={{ fontWeight: '$bold', fontSize: '$sm' }}>{ticket.ticketNumber}</Text>
+                      <Text css={{ color: '$accents7', fontSize: '$xs' }}>
+                        {new Date(ticket.createdDate).toLocaleDateString()}
+                      </Text>
+                    </Box>
+                  </Flex>
+                  
+                  {/* Customer */}
+                  <Flex direction="column" css={{ flex: '1.5' }}>
+                    <Text css={{ fontWeight: '$bold', fontSize: '$sm' }}>{ticket.customer.name}</Text>
+                    <Text css={{ color: '$accents7', fontSize: '$xs' }}>{ticket.customer.email}</Text>
+                  </Flex>
+                  
+                  {/* Subject */}
+                  <Flex direction="column" css={{ flex: '2' }}>
+                    <Text css={{ fontWeight: '$semibold', fontSize: '$sm' }}>{ticket.subject}</Text>
+                    <Text css={{ color: '$accents7', fontSize: '$xs' }}>Subject</Text>
+                  </Flex>
+                  
+                  {/* Priority */}
+                  <Flex align="center" css={{ flex: '1' }}>
+                    <Badge color={getPriorityColor(ticket.priority)} variant="flat" size="sm">
+                      {ticket.priority.toUpperCase()}
+                    </Badge>
+                  </Flex>
+                  
+                  {/* Status */}
+                  <Flex align="center" css={{ flex: '1' }}>
+                    <Badge color={getStatusColor(ticket.status)} variant="flat" size="sm">
+                      {ticket.status.toUpperCase().replace('-', ' ')}
+                    </Badge>
+                  </Flex>
+                  
+                  {/* Assigned Agent */}
+                  <Flex direction="column" align="end" css={{ flex: '1' }}>
+                    <Text css={{ fontWeight: '$semibold', fontSize: '$sm' }}>
+                      {ticket.assignedTo || "Unassigned"}
+                    </Text>
+                    <Text css={{ color: '$accents7', fontSize: '$xs' }}>Assigned To</Text>
+                  </Flex>
+                  
+                  {/* Actions */}
+                  <Flex css={{ gap: '$2', flex: '0.5' }}>
+                    <Button auto light size="sm" css={{ minWidth: 'auto', p: '$2' }}>
+                      <InfoIcon />
+                    </Button>
+                    <Dropdown>
+                      <Dropdown.Button auto light size="sm" css={{ minWidth: 'auto', p: '$2' }}>
+                        <DotsIcon />
+                      </Dropdown.Button>
+                      <Dropdown.Menu aria-label="Ticket Actions">
+                        <Dropdown.Item>View Details</Dropdown.Item>
+                        <Dropdown.Item>Assign Agent</Dropdown.Item>
+                        <Dropdown.Item>Change Priority</Dropdown.Item>
+                        <Dropdown.Item>Add Note</Dropdown.Item>
+                        <Dropdown.Item color="success">Resolve</Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  </Flex>
+                </Flex>
+              </Card>
+            ))}
+          </Box>
         )}
 
         {/* Messages Tab */}

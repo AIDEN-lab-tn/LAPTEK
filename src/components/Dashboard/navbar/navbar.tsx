@@ -1,6 +1,6 @@
 "use client";
 import {Input, Link, Navbar, Text} from '@nextui-org/react';
-import React from 'react';
+import React, { useId } from 'react';
 import {FeedbackIcon} from '../icons/navbar/feedback-icon';
 import {GithubIcon} from '../icons/navbar/github-icon';
 import {SupportIcon} from '../icons/navbar/support-icon';
@@ -10,12 +10,15 @@ import {Flex} from '../styles/flex';
 import {BurguerButton} from './burguer-button';
 import {NotificationsDropdown} from './notifications-dropdown';
 import {UserDropdown} from './user-dropdown';
+import {useIsClient} from '../../../hooks/useIsClient';
 
 interface Props {
    children: React.ReactNode;
 }
 
 export const NavbarWrapper = ({children}: Props) => {
+   const searchInputId = useId();
+   const isClient = useIsClient();
    const collapseItems = [
       'Profile',
       'Dashboard',
@@ -51,6 +54,8 @@ export const NavbarWrapper = ({children}: Props) => {
             >
                <Input
                   clearable
+                  id={searchInputId}
+                  suppressHydrationWarning={true}
                   contentLeft={
                      <SearchIcon
                         fill="var(--nextui-colors-accents6)"
@@ -100,7 +105,7 @@ export const NavbarWrapper = ({children}: Props) => {
                </Navbar.Content>
 
                <Navbar.Content>
-                  <NotificationsDropdown />
+                  {isClient && <NotificationsDropdown />}
                </Navbar.Content>
 
                <Navbar.Content hideIn={'md'}>
@@ -115,7 +120,7 @@ export const NavbarWrapper = ({children}: Props) => {
                   </Link>
                </Navbar.Content>
                <Navbar.Content>
-                  <UserDropdown />
+                  {isClient && <UserDropdown />}
                </Navbar.Content>
             </Navbar.Content>
 

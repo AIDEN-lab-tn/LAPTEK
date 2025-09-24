@@ -1,12 +1,12 @@
 import {Dropdown, Navbar} from '@nextui-org/react';
-import React from 'react';
+import React, { useId } from 'react';
 import {NotificationIcon} from '../icons/navbar/notificationicon';
 
 export const NotificationsDropdown = () => {
    return (
       <Dropdown placement="bottom-right">
          <Dropdown.Trigger>
-            <Navbar.Item>
+            <Navbar.Item suppressHydrationWarning={true}>
                <NotificationIcon />
             </Navbar.Item>
          </Dropdown.Trigger>

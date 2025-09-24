@@ -4,8 +4,28 @@ import React from 'react';
 import {Box} from '../styles/box';
 import {columns, users} from './data';
 import {RenderCell} from './render-cell';
+import {useIsClient} from '../../../hooks/useIsClient';
 
 export const TableWrapper = () => {
+   const isClient = useIsClient();
+   
+   if (!isClient) {
+      return (
+         <Box
+            css={{
+               border: '1px solid $accents2',
+               borderRadius: '$lg',
+               boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+               p: '$8',
+               textAlign: 'center',
+               color: '$accents7'
+            }}
+         >
+            Loading...
+         </Box>
+      );
+   }
+
    return (
       <Box
          css={{
@@ -28,6 +48,7 @@ export const TableWrapper = () => {
                px: '$6',
             }}
             selectionMode="multiple"
+            suppressHydrationWarning={true}
          >
             <Table.Header columns={columns}>
                {(column) => (
