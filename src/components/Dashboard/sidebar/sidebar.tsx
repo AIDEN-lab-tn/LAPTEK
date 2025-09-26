@@ -18,6 +18,9 @@ import {OrdersIcon} from '../icons/sidebar/orders-icon';
 import {InventoryIcon} from '../icons/sidebar/inventory-icon';
 import {MarketingIcon} from '../icons/sidebar/marketing-icon';
 import {SupportIcon} from '../icons/sidebar/support-icon';
+import {AnalyticsIcon} from '../icons/sidebar/analytics-icon';
+import {MessageIcon} from '../icons/sidebar/message-icon';
+import {OdooIcon} from '../icons/sidebar/odoo-icon';
 import {CategoriesIcon} from '../icons/sidebar/categories-icon';
 import {CollapseItems} from './collapse-items';
 import {SidebarItem} from './sidebar-item';
@@ -101,6 +104,12 @@ export const SidebarWrapper = () => {
                         href="/dashboard/reports"
                      />
                      <SidebarItem
+                        isActive={pathname === '/dashboard/analytics'}
+                        title="Advanced Analytics"
+                        icon={<AnalyticsIcon />}
+                        href="/dashboard/analytics"
+                     />
+                     <SidebarItem
                         isActive={pathname === '/dashboard/marketing'}
                         title="Marketing"
                         icon={<MarketingIcon />}
@@ -109,6 +118,12 @@ export const SidebarWrapper = () => {
                   </SidebarMenu>
 
                   <SidebarMenu title="Support & Configuration">
+                     <SidebarItem
+                        isActive={pathname === '/dashboard/chat-histories'}
+                        title="AI Chat Histories"
+                        icon={<MessageIcon />}
+                        href="/dashboard/chat-histories"
+                     />
                      <SidebarItem
                         isActive={pathname === '/dashboard/support'}
                         title="Support"
@@ -126,6 +141,12 @@ export const SidebarWrapper = () => {
                         title="Integrations"
                         icon={<DevIcon />}
                         href="/dashboard/integrations"
+                     />
+                     <SidebarItem
+                        isActive={pathname === '/dashboard/odoo-integration'}
+                        title="Odoo Integration"
+                        icon={<OdooIcon />}
+                        href="/dashboard/odoo-integration"
                      />
                   </SidebarMenu>
 
